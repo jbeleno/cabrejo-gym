@@ -12,31 +12,50 @@ export function Contact() {
       <form className="max-w-2xl mx-auto space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-3">
-            <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+            <label
+              htmlFor="nombre"
+              className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500"
+            >
               Nombre Completo
             </label>
             <input
+              id="nombre"
+              name="nombre"
               type="text"
-              placeholder="John Doe"
+              placeholder="Tu nombre"
+              autoComplete="name"
               className="w-full bg-brand-dark border border-transparent focus:border-accent focus:ring-0 text-white p-5 rounded-sm transition outline-none"
             />
           </div>
           <div className="space-y-3">
-            <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+            <label
+              htmlFor="email"
+              className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500"
+            >
               Email
             </label>
             <input
+              id="email"
+              name="email"
               type="email"
-              placeholder="john@example.com"
+              placeholder="tu@email.com"
+              autoComplete="email"
               className="w-full bg-brand-dark border border-transparent focus:border-accent focus:ring-0 text-white p-5 rounded-sm transition outline-none"
             />
           </div>
         </div>
         <div className="space-y-3">
-          <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+          <label
+            htmlFor="interes"
+            className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500"
+          >
             Interés
           </label>
-          <select className="w-full bg-brand-dark border border-transparent focus:border-accent focus:ring-0 text-white p-5 rounded-sm transition appearance-none outline-none">
+          <select
+            id="interes"
+            name="interes"
+            className="w-full bg-brand-dark border border-transparent focus:border-accent focus:ring-0 text-white p-5 rounded-sm transition appearance-none outline-none"
+          >
             <option>Plan Mensual - Única Sede</option>
             <option>Plan Trimestral - Única Sede</option>
             <option>Plan Semestral - Única Sede</option>
@@ -51,10 +70,15 @@ export function Contact() {
           </select>
         </div>
         <div className="space-y-3">
-          <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+          <label
+            htmlFor="mensaje"
+            className="block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500"
+          >
             Mensaje
           </label>
           <textarea
+            id="mensaje"
+            name="mensaje"
             placeholder="¿Cómo podemos ayudarte?"
             rows={4}
             className="w-full bg-brand-dark border border-transparent focus:border-accent focus:ring-0 text-white p-5 rounded-sm transition outline-none"

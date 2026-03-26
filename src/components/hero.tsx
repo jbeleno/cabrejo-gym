@@ -8,8 +8,8 @@ export function Hero() {
     >
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-bg.jpg"
-          alt="Gym Interior"
+          src="/images/real-sede-centro.jpg"
+          alt="Interior de Cabrejo Gym sede centro en Neiva con área de pesas"
           fill
           className="object-cover opacity-40"
           priority

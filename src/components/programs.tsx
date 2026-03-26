@@ -47,7 +47,7 @@ export function Programs() {
               <div className="aspect-[4/5] overflow-hidden relative">
                 <Image
                   src={program.image}
-                  alt={program.title}
+                  alt={`${program.title} en Cabrejo Gym Neiva`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
