@@ -1,32 +1,40 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const Map = dynamic(() => import("./map"), { ssr: false });
 
 const sedes = [
   {
     name: "Sede Norte",
     address: "Av. Principal Norte 456, Zona Norte",
-    city: "Ciudad Deportiva, CP 45010",
-    phone: "+52 (555) 111-2233",
+    city: "Neiva, Huila",
+    phone: "+57 (608) 111-2233",
     email: "norte@cabrejogym.com",
     hours: "Lun-Vie 5:00-23:00 | Sáb 7:00-18:00 | Dom 8:00-14:00",
+    lat: 2.9489685,
+    lng: -75.287751,
   },
   {
     name: "Sede Centro",
-    address: "Av. Central 123, Distrito Fitness",
-    city: "Ciudad Deportiva, CP 45000",
-    phone: "+52 (555) 123-4567",
+    address: "Cra 5 #10-23, Centro",
+    city: "Neiva, Huila",
+    phone: "+57 (608) 123-4567",
     email: "centro@cabrejogym.com",
     hours: "Lun-Vie 5:00-23:00 | Sáb 7:00-18:00 | Dom 8:00-14:00",
+    lat: 2.9334206,
+    lng: -75.2911508,
   },
   {
     name: "Sede Sur",
-    address: "Blvd. del Sur 789, Plaza Fitness",
-    city: "Ciudad Deportiva, CP 45030",
-    phone: "+52 (555) 444-5566",
+    address: "Cll 21 Sur #7-89, Zona Sur",
+    city: "Neiva, Huila",
+    phone: "+57 (608) 444-5566",
     email: "sur@cabrejogym.com",
     hours: "Lun-Vie 5:00-23:00 | Sáb 7:00-20:00 | Dom 8:00-16:00",
+    lat: 2.9164367,
+    lng: -75.2834826,
   },
 ];
 
@@ -45,8 +53,8 @@ export function Location() {
             Nuestras <span className="text-accent">Sedes</span>
           </h3>
           <p className="mt-4 text-gray-400 max-w-md mx-auto text-lg font-light">
-            Entrena donde te quede mejor. Misma calidad, mismo equipo, en toda la
-            ciudad.
+            Entrena donde te quede mejor. Misma calidad, mismo equipo, en toda
+            Neiva.
           </p>
         </div>
 
@@ -162,18 +170,7 @@ export function Location() {
           </div>
 
           <div className="lg:col-span-8 h-[350px] sm:h-[400px] lg:h-[500px] bg-brand-gray overflow-hidden relative border border-white/5">
-            <Image
-              src="/images/map.jpg"
-              alt={`Mapa ${sede.name}`}
-              fill
-              className="object-cover dark-map-overlay"
-            />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <div className="relative flex items-center justify-center">
-                <div className="absolute w-16 h-16 bg-accent/30 rounded-full animate-ping" />
-                <div className="relative w-8 h-8 bg-accent rounded-full shadow-[0_0_25px_rgba(255,245,13,0.8)]" />
-              </div>
-            </div>
+            <Map key={sede.name} lat={sede.lat} lng={sede.lng} name={sede.name} />
           </div>
         </div>
       </div>
