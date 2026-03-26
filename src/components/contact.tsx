@@ -37,10 +37,17 @@ export function Contact() {
             Interés
           </label>
           <select className="w-full bg-brand-dark border border-transparent focus:border-accent focus:ring-0 text-white p-5 rounded-sm transition appearance-none outline-none">
-            <option>Membresía Individual</option>
-            <option>Entrenamiento Personal</option>
-            <option>Clases Grupales</option>
-            <option>Otros</option>
+            <option>Plan Mensual - Única Sede</option>
+            <option>Plan Trimestral - Única Sede</option>
+            <option>Plan Semestral - Única Sede</option>
+            <option>Plan Anual - Única Sede</option>
+            <option>Plan Mensual - Todas las Sedes</option>
+            <option>Plan Trimestral - Todas las Sedes</option>
+            <option>Plan Semestral - Todas las Sedes</option>
+            <option>Plan Anual - Todas las Sedes</option>
+            <option>Plan Personalizado - Única Sede</option>
+            <option>Plan Personalizado - Todas las Sedes</option>
+            <option>Otro / Información General</option>
           </select>
         </div>
         <div className="space-y-3">
