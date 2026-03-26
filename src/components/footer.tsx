@@ -11,7 +11,7 @@ const schedule = [
 export function Footer() {
   return (
     <footer className="bg-brand-dark pt-32 pb-12 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-16 mb-24">
+      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10 md:gap-16 mb-24">
         <div className="md:col-span-2">
           <div className="text-4xl font-black italic tracking-tighter mb-8">
             CABREJO<span className="text-accent">GYM</span>

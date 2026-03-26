@@ -49,7 +49,7 @@ export function Location() {
           <h2 className="text-accent text-sm font-bold tracking-[0.4em] uppercase mb-4">
             3 Ubicaciones
           </h2>
-          <h3 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter">
+          <h3 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black italic uppercase tracking-tighter">
             Nuestras <span className="text-accent">Sedes</span>
           </h3>
           <p className="mt-4 text-gray-400 max-w-md mx-auto text-lg font-light">

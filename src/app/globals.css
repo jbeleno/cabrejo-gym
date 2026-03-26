@@ -7,6 +7,10 @@
   --font-sans: "Inter", sans-serif;
 }
 
+html, body {
+  overflow-x: clip;
+}
+
 body {
   background: var(--color-brand-dark);
   color: #ffffff;

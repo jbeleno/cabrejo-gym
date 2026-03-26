@@ -19,7 +19,7 @@ export function Hero() {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
         <div className="max-w-4xl">
-          <h1 className="text-5xl sm:text-7xl md:text-[10rem] font-black leading-none tracking-tighter mb-6 uppercase">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[10rem] font-black leading-none tracking-tighter mb-6 uppercase">
             Transforma <br />
             <span className="text-outline">Tu</span> Realidad
           </h1>
@@ -28,10 +28,10 @@ export function Hero() {
             entrenamiento de élite en 3 sedes de la ciudad.
           </p>
           <div className="flex flex-wrap gap-4 sm:gap-6 mb-16">
-            <button className="bg-white text-brand-dark px-8 sm:px-10 py-4 sm:py-5 font-black uppercase tracking-widest text-sm hover:bg-accent transition-colors">
+            <button className="bg-white text-brand-dark px-6 sm:px-10 py-4 sm:py-5 font-black uppercase tracking-widest text-xs sm:text-sm hover:bg-accent transition-colors">
               Comienza Hoy
             </button>
-            <button className="border border-white/20 px-8 sm:px-10 py-4 sm:py-5 font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-colors">
+            <button className="border border-white/20 px-6 sm:px-10 py-4 sm:py-5 font-black uppercase tracking-widest text-xs sm:text-sm hover:bg-white/10 transition-colors">
               Ver Instalaciones
             </button>
           </div>

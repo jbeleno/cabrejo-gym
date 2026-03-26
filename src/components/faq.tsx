@@ -46,7 +46,7 @@ export function FAQ() {
   return (
     <section className="py-32 bg-brand-dark border-t border-white/5">
       <div className="max-w-3xl mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-black mb-16 text-center uppercase tracking-tighter italic">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-16 text-center uppercase tracking-tighter italic">
           Preguntas <span className="text-accent">Frecuentes</span>
         </h2>
         <div className="space-y-2">

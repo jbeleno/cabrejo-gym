@@ -21,7 +21,7 @@ export function Infrastructure() {
           <h2 className="text-accent text-sm font-bold tracking-[0.4em] uppercase mb-4">
             Instalaciones
           </h2>
-          <h3 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter">
+          <h3 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black italic uppercase tracking-tighter">
             Infraestructura <br />
             Premium
           </h3>

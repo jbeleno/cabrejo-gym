@@ -131,7 +131,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} font-sans antialiased overflow-x-hidden`}
+        className={`${inter.variable} font-sans antialiased`}
       >
         {children}
       </body>

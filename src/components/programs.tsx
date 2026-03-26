@@ -29,7 +29,7 @@ export function Programs() {
     <section id="clases" className="py-32 bg-brand-dark">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-20 text-center">
-          <h2 className="text-6xl md:text-8xl font-black italic uppercase leading-none tracking-tighter">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black italic uppercase leading-none tracking-tighter">
             NUESTROS <br />
             <span className="text-accent">PROGRAMAS</span>
           </h2>

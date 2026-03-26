@@ -152,7 +152,7 @@ export function Pricing() {
   return (
     <section id="planes" className="py-32 bg-brand-dark">
       <div className="max-w-7xl mx-auto px-6 text-center mb-12">
-        <h2 className="text-5xl sm:text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-4">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black italic uppercase tracking-tighter mb-4">
           ÚNETE AL <span className="text-accent">CLAN</span>
         </h2>
         <p className="text-gray-400 max-w-lg mx-auto text-lg md:text-xl font-light mb-10">
@@ -163,7 +163,7 @@ export function Pricing() {
         <div className="inline-flex bg-brand-gray border border-white/10 p-1 mb-16">
           <button
             onClick={() => setSede("unica")}
-            className={`px-6 sm:px-10 py-3 text-xs font-black uppercase tracking-widest transition-all ${
+            className={`px-4 sm:px-6 md:px-10 py-3 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all ${
               sede === "unica"
                 ? "bg-accent text-brand-dark"
                 : "text-gray-400 hover:text-white"
@@ -173,7 +173,7 @@ export function Pricing() {
           </button>
           <button
             onClick={() => setSede("todas")}
-            className={`px-6 sm:px-10 py-3 text-xs font-black uppercase tracking-widest transition-all ${
+            className={`px-4 sm:px-6 md:px-10 py-3 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all ${
               sede === "todas"
                 ? "bg-accent text-brand-dark"
                 : "text-gray-400 hover:text-white"

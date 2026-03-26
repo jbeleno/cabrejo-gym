@@ -32,7 +32,7 @@ export function Trainers() {
             <span className="text-accent font-black text-xs uppercase tracking-[0.3em]">
               Staff Elite
             </span>
-            <h2 className="text-5xl md:text-7xl font-black italic uppercase mt-2 tracking-tighter">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black italic uppercase mt-2 tracking-tighter">
               MEET THE <br />
               <span className="text-stroke-yellow">EXPERTS</span>
             </h2>
