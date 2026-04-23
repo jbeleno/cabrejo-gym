@@ -13,6 +13,10 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   background: #0A0A0A;
   color: #fff;
