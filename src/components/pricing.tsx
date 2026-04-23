@@ -1,280 +1,133 @@
 "use client";
 
 import { useState } from "react";
+import { SectionTag, Arrow, BigNumber } from "./ui";
 
-type SedeType = "unica" | "todas";
+type Mode = "unica" | "todas";
 
-const standardPlans = {
+const plansData = {
   unica: [
-    {
-      name: "Mensual",
-      price: "$89",
-      period: "/ mes",
-      saving: null,
-      featured: false,
-      features: [
-        "Acceso a una sede",
-        "Área de pesas y cardio",
-        "Clases grupales incluidas",
-        "Vestidores y duchas",
-      ],
-    },
-    {
-      name: "Trimestral",
-      price: "$239",
-      period: "/ 3 meses",
-      saving: "Ahorra $28",
-      featured: false,
-      features: [
-        "Acceso a una sede",
-        "Área de pesas y cardio",
-        "Clases grupales incluidas",
-        "Vestidores y duchas",
-        "Evaluación física inicial",
-      ],
-    },
-    {
-      name: "Semestral",
-      price: "$429",
-      period: "/ 6 meses",
-      saving: "Ahorra $105",
-      featured: true,
-      features: [
-        "Acceso a una sede",
-        "Área de pesas y cardio",
-        "Todas las clases grupales",
-        "Evaluación física trimestral",
-        "Plan de entrenamiento app",
-      ],
-    },
-    {
-      name: "Anual",
-      price: "$779",
-      period: "/ año",
-      saving: "Ahorra $289",
-      featured: false,
-      features: [
-        "Acceso a una sede",
-        "Área de pesas y cardio",
-        "Todas las clases grupales",
-        "Evaluación física mensual",
-        "Plan de entrenamiento app",
-        "1 mes gratis incluido",
-      ],
-    },
+    { id: "m", tier: "Mensual", price: "89", per: "/mes", save: null, features: ["Acceso a tu sede", "Todas las clases grupales", "Casilleros básicos", "Horario extendido 5:00-23:00"] },
+    { id: "t", tier: "Trimestral", price: "239", per: "/3 meses", save: "Ahorra $28", features: ["Todo lo del plan Mensual", "Evaluación física inicial", "1 invitado al mes"] },
+    { id: "s", tier: "Semestral", price: "429", per: "/6 meses", save: "Ahorra $105", features: ["Todo lo del plan Trimestral", "Acceso a zona de recuperación", "Plan de entrenamiento base", "2 invitados al mes"], popular: true },
+    { id: "a", tier: "Anual", price: "779", per: "/año", save: "Ahorra $289", features: ["Todo lo del plan Semestral", "Asesoría nutricional general", "Kit de bienvenida Cabrejo", "Invitados ilimitados*"] },
   ],
   todas: [
-    {
-      name: "Mensual",
-      price: "$119",
-      period: "/ mes",
-      saving: null,
-      featured: false,
-      features: [
-        "Acceso a las 3 sedes",
-        "Área de pesas y cardio",
-        "Clases grupales incluidas",
-        "Vestidores y duchas",
-      ],
-    },
-    {
-      name: "Trimestral",
-      price: "$319",
-      period: "/ 3 meses",
-      saving: "Ahorra $38",
-      featured: false,
-      features: [
-        "Acceso a las 3 sedes",
-        "Área de pesas y cardio",
-        "Clases grupales incluidas",
-        "Vestidores y duchas",
-        "Evaluación física inicial",
-      ],
-    },
-    {
-      name: "Semestral",
-      price: "$579",
-      period: "/ 6 meses",
-      saving: "Ahorra $135",
-      featured: true,
-      features: [
-        "Acceso a las 3 sedes",
-        "Área de pesas y cardio",
-        "Todas las clases grupales",
-        "Evaluación física trimestral",
-        "Plan de entrenamiento app",
-      ],
-    },
-    {
-      name: "Anual",
-      price: "$1,049",
-      period: "/ año",
-      saving: "Ahorra $379",
-      featured: false,
-      features: [
-        "Acceso a las 3 sedes",
-        "Área de pesas y cardio",
-        "Todas las clases grupales",
-        "Evaluación física mensual",
-        "Plan de entrenamiento app",
-        "1 mes gratis incluido",
-      ],
-    },
+    { id: "m", tier: "Mensual", price: "119", per: "/mes", save: null, features: ["Acceso a las 3 sedes", "Todas las clases grupales", "Casilleros básicos", "Horario extendido 5:00-23:00"] },
+    { id: "t", tier: "Trimestral", price: "319", per: "/3 meses", save: "Ahorra $38", features: ["Todo lo del plan Mensual", "Evaluación física inicial", "1 invitado al mes"] },
+    { id: "s", tier: "Semestral", price: "579", per: "/6 meses", save: "Ahorra $135", features: ["Todo lo del plan Trimestral", "Acceso a zona de recuperación", "Plan de entrenamiento base", "2 invitados al mes"], popular: true },
+    { id: "a", tier: "Anual", price: "1,049", per: "/año", save: "Ahorra $379", features: ["Todo lo del plan Semestral", "Asesoría nutricional general", "Kit de bienvenida Cabrejo", "Invitados ilimitados*"] },
   ],
-};
+} as const;
 
-const personalizedPlans = {
-  unica: {
-    price: "$179",
-    sedeLabel: "una sede",
-  },
-  todas: {
-    price: "$239",
-    sedeLabel: "las 3 sedes",
-  },
-};
-
-const personalizedFeatures = [
-  "Entrenador personal dedicado",
-  "Plan nutricional personalizado",
-  "Evaluación física semanal",
-  "Acceso zona VIP / Sauna",
-  "Seguimiento continuo vía app",
-  "Horarios flexibles con tu coach",
-];
+const custom = { unica: "179", todas: "239" };
 
 export function Pricing() {
-  const [sede, setSede] = useState<SedeType>("unica");
-
-  const plans = standardPlans[sede];
-  const personalized = personalizedPlans[sede];
+  const [mode, setMode] = useState<Mode>("unica");
+  const plans = plansData[mode];
 
   return (
-    <section id="planes" className="py-32 bg-brand-dark">
-      <div className="max-w-7xl mx-auto px-6 text-center mb-12">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black italic uppercase tracking-tighter mb-4">
-          ÚNETE AL <span className="text-accent">CLAN</span>
-        </h2>
-        <p className="text-gray-400 max-w-lg mx-auto text-lg md:text-xl font-light mb-10">
-          Elige tu plan y comienza a transformar tu vida. 3 sedes, un solo
-          objetivo.
-        </p>
+    <section id="planes" className="relative bg-steel py-24 md:py-32 overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-10 -top-10 font-display font-black italic leading-none text-[22vw] text-white/[0.03] select-none">Planes</div>
 
-        <div className="inline-flex bg-brand-gray border border-white/10 p-1 mb-16">
-          <button
-            onClick={() => setSede("unica")}
-            className={`px-4 sm:px-6 md:px-10 py-3 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all ${
-              sede === "unica"
-                ? "bg-accent text-brand-dark"
-                : "text-gray-400 hover:text-white"
-            }`}
-          >
-            Única Sede
-          </button>
-          <button
-            onClick={() => setSede("todas")}
-            className={`px-4 sm:px-6 md:px-10 py-3 text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all ${
-              sede === "todas"
-                ? "bg-accent text-brand-dark"
-                : "text-gray-400 hover:text-white"
-            }`}
-          >
-            Todas las Sedes
-          </button>
+      <div className="relative max-w-[1600px] mx-auto px-5 md:px-10">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 reveal">
+          <div>
+            <SectionTag idx={5} label="Planes & Membresías" />
+            <h2 className="mt-6 font-display font-black uppercase leading-[0.86] tracking-[-0.03em] text-[clamp(2.75rem,8vw,7rem)]">
+              Únete al <span className="italic text-volt">clan</span>
+            </h2>
+          </div>
+          <p className="max-w-sm text-white/60 text-lg">
+            Membresías simples y transparentes. Cancelas cuando quieras, desde cualquiera de nuestras 3 sedes.
+          </p>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {plans.map((plan) => (
-          <article
-            key={plan.name}
-            className={`p-8 flex flex-col transition-all ${
-              plan.featured
-                ? "bg-brand-gray border-2 border-accent relative transform lg:-translate-y-4 shadow-2xl"
-                : "bg-brand-gray border border-white/5 hover:border-white/20"
-            }`}
-          >
-            {plan.featured && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-brand-dark text-[10px] font-black px-5 py-1.5 uppercase tracking-[0.2em] whitespace-nowrap">
-                Más Popular
+        <div className="mt-12 reveal">
+          <div role="tablist" aria-label="Alcance de membresía" className="inline-flex p-1.5 bg-ink border border-white/10">
+            {([["unica", "Única Sede"], ["todas", "Todas las Sedes"]] as const).map(([k, label]) => (
+              <button key={k} role="tab" aria-selected={mode === k} onClick={() => setMode(k)} className={`px-6 py-3 text-[12px] uppercase tracking-[0.2em] font-bold transition ${mode === k ? "bg-volt text-ink" : "text-white/70 hover:text-white"}`}>
+                {label}
+              </button>
+            ))}
+          </div>
+          <div className="ml-4 inline-block align-middle font-mono text-[11px] tracking-[0.2em] uppercase text-white/45">
+            Mostrando — {mode === "unica" ? "1 sede a elegir" : "3 sedes incluidas"}
+          </div>
+        </div>
+
+        <div className="mt-10 grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+          {plans.map((p, i) => (
+            <article key={p.id + mode} className={`relative flex flex-col p-7 border transition-all duration-300 reveal ${"popular" in p && p.popular ? "bg-ink border-volt shadow-[0_30px_60px_-25px_rgba(255,245,13,0.35)] lg:-translate-y-3" : "bg-ink border-white/10 hover:border-white/30"}`} style={{ transitionDelay: `${i * 70}ms` }}>
+              {"popular" in p && p.popular && (
+                <div className="absolute -top-3 left-6 bg-volt text-ink font-bold uppercase text-[10px] tracking-[0.28em] px-3 py-1.5">Más popular</div>
+              )}
+              <div className="flex items-center justify-between">
+                <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-white/50">{p.tier}</div>
+                <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/30">0{i + 1}</div>
               </div>
-            )}
-            {plan.saving && (
-              <span className="text-accent text-[10px] font-black uppercase tracking-widest mb-2">
-                {plan.saving}
-              </span>
-            )}
-            <h3 className="text-lg font-black uppercase mb-3">{plan.name}</h3>
-            <div className="mb-6">
-              <span
-                className={`text-4xl font-black ${
-                  plan.featured ? "text-accent" : ""
-                }`}
-              >
-                {plan.price}
-              </span>
-              <span className="text-gray-500 text-sm italic">
-                {" "}
-                {plan.period}
-              </span>
-            </div>
-            <ul className="space-y-3 mb-8 flex-grow text-sm text-gray-400 font-medium">
-              {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-3">
-                  <span className="text-accent mt-0.5 shrink-0">&#10003;</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            <button
-              className={`w-full py-4 font-black tracking-widest text-xs transition-colors ${
-                plan.featured
-                  ? "bg-accent text-brand-dark hover:bg-white"
-                  : "border border-white/20 text-white hover:bg-white hover:text-brand-dark hover:border-white"
-              }`}
-            >
-              SELECCIONAR
-            </button>
-          </article>
-        ))}
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-brand-gray border border-accent/30 p-8 md:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="h-[2px] w-8 bg-accent" />
-              <span className="text-accent text-[10px] font-black uppercase tracking-[0.3em]">
-                Entrenamiento a tu medida
-              </span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-black italic uppercase tracking-tight mb-4">
-              Plan Personalizado
-            </h3>
-            <p className="text-gray-500 text-sm mb-4">
-              Acceso a {personalized.sedeLabel} &middot; Solo mensual
-            </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-400 font-medium">
-              {personalizedFeatures.map((feature) => (
-                <li key={feature} className="flex items-start gap-3">
-                  <span className="text-accent mt-0.5 shrink-0">&#10003;</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="text-center md:text-right shrink-0">
-            <div className="mb-4">
-              <span className="text-5xl font-black text-accent">
-                {personalized.price}
-              </span>
-              <span className="text-gray-500 text-sm italic"> / mes</span>
-            </div>
-            <button className="bg-accent text-brand-dark px-12 py-4 font-black text-xs uppercase tracking-widest hover:bg-white transition-colors">
-              COMENZAR AHORA
-            </button>
-          </div>
+              <div className="mt-6 flex items-end gap-1 leading-none">
+                <span className="text-white/50 text-2xl font-display font-black">$</span>
+                <BigNumber n={p.price} className={`text-6xl ${"popular" in p && p.popular ? "text-volt" : "text-white"}`} />
+              </div>
+              <div className="mt-1 font-mono text-[11px] tracking-[0.22em] uppercase text-white/45">{p.per}</div>
+              {p.save ? (
+                <div className="mt-4 inline-block self-start border border-volt/40 text-volt px-2 py-1 text-[10px] font-mono uppercase tracking-[0.22em]">{p.save}</div>
+              ) : (
+                <div className="mt-4 inline-block self-start text-[10px] font-mono uppercase tracking-[0.22em] text-white/40">Sin compromiso</div>
+              )}
+              <ul className="mt-6 flex-1 space-y-3">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-start gap-3 text-[13.5px] text-white/80 leading-snug">
+                    <span className={`mt-[6px] inline-block h-1.5 w-1.5 ${"popular" in p && p.popular ? "bg-volt" : "bg-white/50"}`} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="#contacto" className={`mt-8 inline-flex items-center justify-between w-full px-4 py-3.5 border font-bold uppercase tracking-[0.18em] text-[12px] transition ${"popular" in p && p.popular ? "bg-volt text-ink border-volt hover:bg-white hover:border-white" : "bg-transparent text-white border-white/25 hover:bg-volt hover:text-ink hover:border-volt"}`}>
+                Seleccionar <Arrow />
+              </a>
+            </article>
+          ))}
         </div>
+
+        <article className="mt-6 grid lg:grid-cols-[1.2fr_1fr] border border-white/10 bg-ink overflow-hidden reveal">
+          <div className="p-8 md:p-10 relative">
+            <div className="absolute top-5 right-5 font-mono text-[10px] tracking-[0.25em] uppercase text-white/40">PLAN 05 · Premium</div>
+            <SectionTag idx="*" label="Personalizado" />
+            <h3 className="mt-5 font-display font-black uppercase leading-[0.88] tracking-[-0.03em] text-4xl md:text-6xl">
+              Plan <span className="italic text-volt">personalizado</span>
+            </h3>
+            <p className="mt-4 text-white/65 max-w-lg">
+              Entrenamiento 1:1 con un coach dedicado, plan nutricional a medida y acceso total a la zona VIP.
+            </p>
+            <div className="mt-8 grid sm:grid-cols-2 gap-3">
+              {["Entrenador personal dedicado", "Plan nutricional personalizado", "Evaluación física semanal", "Acceso zona VIP / Sauna", "Seguimiento continuo vía app", "Horarios flexibles con tu coach"].map((f, i) => (
+                <div key={f} className="flex items-start gap-3 text-[13.5px] text-white/85 leading-snug border-t border-white/10 pt-3">
+                  <span className="font-mono text-[10px] text-volt mt-[3px]">0{i + 1}</span>
+                  {f}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative p-8 md:p-10 bg-volt text-ink flex flex-col justify-between">
+            <div aria-hidden="true" className="absolute inset-0 diag opacity-[0.06]" />
+            <div className="relative">
+              <div className="font-mono text-[11px] tracking-[0.28em] uppercase text-ink/70">Desde</div>
+              <div className="mt-4 flex items-end gap-1 leading-none">
+                <span className="text-ink/70 text-2xl font-display font-black">$</span>
+                <BigNumber n={custom[mode]} className="text-ink text-7xl md:text-8xl" />
+                <span className="ml-2 mb-2 font-mono text-[11px] tracking-[0.22em] uppercase text-ink/70">/mes</span>
+              </div>
+              <div className="mt-2 font-mono text-[11px] tracking-[0.22em] uppercase text-ink/70">
+                {mode === "unica" ? "Única sede · acceso premium" : "Las 3 sedes · acceso premium"}
+              </div>
+            </div>
+            <a href="#contacto" className="relative mt-10 inline-flex items-center justify-between px-5 py-4 bg-ink text-white font-bold uppercase tracking-[0.18em] text-[12px] hover:bg-white hover:text-ink transition">
+              Seleccionar personalizado <Arrow />
+            </a>
+          </div>
+        </article>
       </div>
     </section>
   );

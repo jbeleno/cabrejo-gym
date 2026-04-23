@@ -1,10 +1,22 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-accent: #FFF50D;
-  --color-brand-dark: #0A0A0A;
-  --color-brand-gray: #1A1A1A;
-  --font-sans: "Inter", sans-serif;
+  --color-ink: #0A0A0A;
+  --color-graphite: #141414;
+  --color-steel: #1A1A1A;
+  --color-smoke: #242424;
+  --color-volt: #FFF50D;
+  --color-voltdim: #cbc30a;
+  --color-bone: #F5F5F0;
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-sans: "Archivo", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html, body {
+  background: #0A0A0A;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
 }
 
 html, body {
@@ -12,57 +24,96 @@ html, body {
 }
 
 body {
-  background: var(--color-brand-dark);
-  color: #ffffff;
-  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
 }
 
-@keyframes scroll-slow {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-scroll {
-  animation: scroll-slow 30s linear infinite;
-}
-
-.text-outline {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-  color: transparent;
-}
-
-.text-stroke-yellow {
-  -webkit-text-stroke: 1px #FFF50D;
-  color: transparent;
-}
-
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
-
-.accordion-item.active .accordion-content {
-  max-height: 200px;
-}
-
-.accordion-item.active .accordion-icon {
-  transform: rotate(180deg);
-}
-
-.dark-map-overlay {
-  filter: grayscale(100%) invert(90%) contrast(150%);
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0A0A0A;
-}
-
-::-webkit-scrollbar-thumb {
+::selection {
   background: #FFF50D;
-  border-radius: 10px;
+  color: #0A0A0A;
+}
+
+.stroke-text {
+  -webkit-text-stroke: 2px currentColor;
+  color: transparent;
+}
+@media (min-width: 1024px) {
+  .stroke-text { -webkit-text-stroke: 3px currentColor; }
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+  opacity: .35;
+}
+
+.marquee-track {
+  animation: marquee 45s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+:where(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid #FFF50D;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.placeholder-photo {
+  background-color: #111;
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px),
+    radial-gradient(120% 80% at 20% 10%, rgba(255,245,13,0.10), transparent 55%),
+    radial-gradient(100% 80% at 80% 100%, rgba(255,255,255,0.04), transparent 60%);
+}
+.placeholder-photo.warm {
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px),
+    radial-gradient(120% 80% at 80% 10%, rgba(255,120,40,0.12), transparent 55%),
+    radial-gradient(100% 80% at 20% 100%, rgba(0,0,0,0.4), transparent 60%);
+}
+.placeholder-photo.cool {
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px),
+    radial-gradient(120% 80% at 20% 90%, rgba(60,130,255,0.10), transparent 55%),
+    radial-gradient(100% 80% at 80% 10%, rgba(255,255,255,0.05), transparent 60%);
+}
+
+.diag {
+  background-image: repeating-linear-gradient(-45deg, rgba(255,245,13,0.8) 0 1px, transparent 1px 10px);
+}
+
+.img-fade {
+  background: linear-gradient(to top, rgba(10,10,10,.92) 0%, rgba(10,10,10,0.1) 55%, rgba(10,10,10,0) 100%);
+}
+
+.lb-enter {
+  animation: fadeIn .25s ease-out forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+.marquee-group > * {
+  flex-shrink: 0;
 }

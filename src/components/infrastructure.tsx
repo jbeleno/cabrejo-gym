@@ -1,68 +1,96 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { Lightbox } from "./lightbox";
+import { useState, useEffect } from "react";
+import { SectionTag } from "./ui";
 
-const gallery = [
-  { src: "/images/real-sede-centro.jpg", alt: "Sede Centro - Área de pesas", className: "row-span-2" },
-  { src: "/images/real-cardio.jpg", alt: "Zona Cardio", className: "col-span-2" },
-  { src: "/images/real-machines.jpg", alt: "Zona de Máquinas", className: "" },
-  { src: "/images/real-training.jpg", alt: "Entrenamiento", className: "" },
+const tiles = [
+  { label: "Sala de pesas", src: "/images/real-sede-centro.jpg", span: "md:row-span-2", caption: "800 m² · Hammer Strength" },
+  { label: "Zona funcional", src: "/images/real-machines.jpg", span: "", caption: "Rig competitivo" },
+  { label: "Ring de boxeo", src: "/images/real-cardio.jpg", span: "md:col-span-2", caption: "Profesional · 6 x 6 m" },
+  { label: "Estudio yoga", src: "/images/gym-machines.jpg", span: "", caption: "Climatizado" },
+  { label: "Sauna & recuperación", src: "/images/real-training.jpg", span: "", caption: "Zona VIP" },
 ];
 
 export function Infrastructure() {
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [lightbox, setLightbox] = useState<typeof tiles[0] | null>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = lightbox ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [lightbox]);
 
   return (
-    <section id="infraestructura" className="py-32 bg-brand-dark">
-      <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div>
-          <h2 className="text-accent text-sm font-bold tracking-[0.4em] uppercase mb-4">
-            Instalaciones
-          </h2>
-          <h3 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black italic uppercase tracking-tighter">
-            Infraestructura <br />
-            Premium
-          </h3>
-        </div>
-        <p className="text-gray-400 max-w-sm text-lg font-light border-l-2 border-accent pl-8">
-          Equipamiento de última generación y espacios diseñados para tu
-          comodidad y rendimiento máximo.
-        </p>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[200px] gap-4">
-          {gallery.map((item) => (
-            <div
-              key={item.alt}
-              className={`overflow-hidden rounded-sm group relative cursor-zoom-in ${item.className}`}
-              onClick={() => setLightbox({ src: item.src, alt: item.alt })}
-            >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                className="object-cover group-hover:scale-110 transition duration-700"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                <svg
-                  className="w-10 h-10 text-white opacity-0 group-hover:opacity-80 transition-opacity drop-shadow-lg"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                </svg>
-              </div>
+    <section className="relative bg-ink py-24 md:py-32">
+      <div className="max-w-[1600px] mx-auto px-5 md:px-10">
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 items-end mb-14 reveal">
+          <div>
+            <SectionTag idx={4} label="Infraestructura" />
+            <h2 className="mt-6 font-display font-black uppercase leading-[0.86] tracking-[-0.03em] text-[clamp(2.5rem,6.8vw,5.5rem)]">
+              Infraestructura<br /><span className="italic">premium</span>
+            </h2>
+          </div>
+          <div className="pl-6 border-l-4 border-volt">
+            <p className="text-white/75 text-lg leading-snug">
+              Equipamiento de última generación y espacios diseñados para tu comodidad y rendimiento máximo.
+            </p>
+            <div className="mt-5 flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.22em] text-white/45">
+              <span>· 3 sedes</span><span>· 2,400 m²</span><span>· 120+ máquinas</span>
             </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[180px] md:auto-rows-[220px] gap-4">
+          {tiles.map((t, i) => (
+            <button
+              key={i}
+              onClick={() => setLightbox(t)}
+              className={`group relative overflow-hidden border border-white/10 ${t.span} reveal`}
+              style={{ transitionDelay: `${i * 60}ms` }}
+              aria-label={`Abrir imagen ${t.label}`}
+            >
+              <Image src={t.src} alt={t.label} fill sizes="(max-width: 640px) 50vw, 33vw" className="object-cover transition-transform duration-[1200ms] group-hover:scale-110" />
+              <div className="absolute inset-0 bg-ink/10 group-hover:bg-ink/55 transition-colors duration-500" />
+              <div className="absolute top-3 left-3 font-mono text-[10px] tracking-[0.22em] uppercase text-white/80">
+                {String(i + 1).padStart(2, "0")} / {String(tiles.length).padStart(2, "0")}
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <span className="flex items-center justify-center w-14 h-14 bg-volt text-ink rounded-full">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="7" /><path d="m20 20-4.3-4.3" /></svg>
+                </span>
+              </div>
+              <div className="absolute inset-x-0 bottom-0 p-4 text-left bg-gradient-to-t from-ink/90 to-transparent">
+                <div className="font-display font-black uppercase text-lg md:text-xl leading-tight tracking-tight">{t.label}</div>
+                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-white/60 mt-1">{t.caption}</div>
+              </div>
+            </button>
           ))}
         </div>
       </div>
 
       {lightbox && (
-        <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+        <div className="fixed inset-0 z-[80] bg-ink/95 backdrop-blur-sm lb-enter flex items-center justify-center p-6" onClick={() => setLightbox(null)} role="dialog" aria-modal="true" aria-label="Visor de imagen">
+          <div className="relative w-full max-w-5xl aspect-[16/10] border border-white/10 overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <Image src={lightbox.src} alt={lightbox.label} fill sizes="100vw" className="object-contain" />
+            <div className="absolute top-0 inset-x-0 p-5 flex items-center justify-between bg-gradient-to-b from-ink/80 to-transparent">
+              <div>
+                <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/60">Ref · Cabrejo Gym</div>
+                <div className="font-display font-black uppercase text-2xl">{lightbox.label}</div>
+              </div>
+              <button onClick={() => setLightbox(null)} className="w-10 h-10 border border-white/30 flex items-center justify-center hover:bg-volt hover:text-ink hover:border-volt transition" aria-label="Cerrar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 6l12 12M18 6l-12 12" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </section>
   );

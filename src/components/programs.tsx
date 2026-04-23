@@ -1,74 +1,56 @@
 import Image from "next/image";
+import { SectionTag, Arrow } from "./ui";
 
-const programs = [
-  {
-    title: "CrossFit",
-    tag: "Intensidad Alta",
-    description:
-      "Entrenamiento funcional de alta intensidad diseñado para mejorar tu fuerza, resistencia y agilidad.",
-    image: "/images/crossfit.jpg",
-  },
-  {
-    title: "Boxing",
-    tag: "Combate",
-    description:
-      "Domina la técnica y mejora tu condición cardiovascular con nuestras sesiones de boxeo profesional.",
-    image: "/images/boxing.jpg",
-  },
-  {
-    title: "Yoga & Mobility",
-    tag: "Bienestar",
-    description:
-      "Encuentra el equilibrio perfecto entre fuerza mental y flexibilidad física en un ambiente enfocado.",
-    image: "/images/yoga.jpg",
-  },
+const items = [
+  { tag: "Intensidad Alta", name: "CrossFit", image: "/images/crossfit.jpg", desc: "Entrenamiento funcional de alta intensidad diseñado para mejorar tu fuerza, resistencia y agilidad.", meta: ["WOD diario", "60 min", "Grupo 12"] },
+  { tag: "Combate", name: "Boxing", image: "/images/boxing.jpg", desc: "Domina la técnica y mejora tu condición cardiovascular con nuestras sesiones de boxeo profesional.", meta: ["Ring pro", "55 min", "Todos los niveles"] },
+  { tag: "Bienestar", name: "Yoga & Mobility", image: "/images/yoga.jpg", desc: "Encuentra el equilibrio perfecto entre fuerza mental y flexibilidad física en un ambiente enfocado.", meta: ["Sala climatizada", "75 min", "Foco mindful"] },
 ];
 
 export function Programs() {
   return (
-    <section id="clases" className="py-32 bg-brand-dark">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-20 text-center">
-          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black italic uppercase leading-none tracking-tighter">
-            NUESTROS <br />
-            <span className="text-accent">PROGRAMAS</span>
-          </h2>
-          <p className="mt-6 text-gray-400 max-w-xl mx-auto text-lg uppercase tracking-widest font-medium">
-            Llevando tu potencial al límite con entrenamiento de clase mundial.
+    <section id="clases" className="relative bg-ink py-24 md:py-32">
+      <div className="max-w-[1600px] mx-auto px-5 md:px-10">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 reveal">
+          <div>
+            <SectionTag idx={2} label="Programas" />
+            <h2 className="mt-6 font-display font-black uppercase leading-[0.86] tracking-[-0.03em] text-[clamp(2.75rem,7vw,6rem)]">
+              Nuestros<br /><span className="italic">programas</span>
+            </h2>
+          </div>
+          <p className="max-w-md text-white/60 text-lg">
+            Tres disciplinas, una obsesión: progreso medible. Cada programa se construye alrededor de tu ritmo y tus objetivos.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {programs.map((program) => (
-            <article
-              key={program.title}
-              className="group relative overflow-hidden bg-brand-gray border border-white/5"
-            >
-              <div className="aspect-[4/5] overflow-hidden relative">
-                <Image
-                  src={program.image}
-                  alt={`${program.title} en Cabrejo Gym Neiva`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((p, i) => (
+            <article key={p.name} className="group relative overflow-hidden h-[560px] border border-white/10 reveal" style={{ transitionDelay: `${i * 100}ms` }}>
+              <Image src={p.image} alt={`${p.name} en Cabrejo Gym Neiva`} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-[1200ms] group-hover:scale-105" />
+              <div className="absolute inset-0 img-fade" />
+
+              <div className="absolute top-6 right-6 font-display font-black italic text-[7rem] leading-none text-white/10 select-none" aria-hidden="true">
+                0{i + 1}
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="h-[2px] w-8 bg-accent" />
-                  <span className="text-accent font-bold text-xs uppercase tracking-widest">
-                    {program.tag}
-                  </span>
+
+              <div className="absolute top-6 left-6 flex items-center gap-2">
+                <span className="bg-volt text-ink font-bold uppercase text-[10px] tracking-[0.22em] px-2 py-1">{p.tag}</span>
+              </div>
+
+              <div className="absolute inset-x-0 bottom-0 p-8">
+                <h3 className="font-display font-black uppercase leading-[0.9] tracking-[-0.02em] text-5xl lg:text-6xl">{p.name}</h3>
+                <p className="mt-4 text-white/75 max-w-sm leading-snug">{p.desc}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {p.meta.map((m) => (
+                    <span key={m} className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60 border border-white/20 px-2.5 py-1.5">{m}</span>
+                  ))}
                 </div>
-                <h3 className="text-3xl font-black italic uppercase mb-4 tracking-tight">
-                  {program.title}
-                </h3>
-                <p className="text-gray-400 text-sm mb-6 line-clamp-2">
-                  {program.description}
-                </p>
-                <button className="w-full py-4 border border-white/20 hover:bg-accent hover:text-brand-dark hover:border-accent transition-all font-bold text-xs uppercase tracking-widest">
-                  Ver Detalles
-                </button>
+                <a href="#contacto" className="mt-7 inline-flex items-center justify-between w-full group/btn border-t border-white/20 pt-5">
+                  <span className="font-bold uppercase tracking-[0.18em] text-[13px] group-hover/btn:text-volt transition">Ver detalles</span>
+                  <span className="relative flex items-center justify-center w-10 h-10 border border-white/30 group-hover/btn:bg-volt group-hover/btn:border-volt group-hover/btn:text-ink transition">
+                    <Arrow />
+                  </span>
+                </a>
               </div>
             </article>
           ))}

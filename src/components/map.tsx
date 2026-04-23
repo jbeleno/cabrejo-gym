@@ -1,8 +1,9 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { useEffect } from "react";
 
 const accentIcon = new L.DivIcon({
   className: "",
@@ -17,6 +18,14 @@ const accentIcon = new L.DivIcon({
   iconAnchor: [10, 10],
 });
 
+function FlyTo({ lat, lng }: { lat: number; lng: number }) {
+  const map = useMap();
+  useEffect(() => {
+    map.flyTo([lat, lng], 15, { duration: 1.2 });
+  }, [map, lat, lng]);
+  return null;
+}
+
 interface MapProps {
   lat: number;
   lng: number;
@@ -30,9 +39,10 @@ export default function Map({ lat, lng, name }: MapProps) {
       zoom={15}
       scrollWheelZoom={false}
       className="h-full w-full z-0"
-      attributionControl={false}
+      attributionControl={true}
     >
       <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
+      <FlyTo lat={lat} lng={lng} />
       <Marker position={[lat, lng]} icon={accentIcon}>
         <Popup>
           <span className="font-bold text-black">{name}</span>
