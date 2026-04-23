@@ -20,11 +20,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Marquee items={["Cabrejo Gym", "/ Neiva", "Disciplina · Acero · Cultura", "/ Est. 2014", "Transforma Tu Realidad", "/ 3 Sedes"]} />
+        <Marquee items={["Cabrejo Gym", "/ Neiva", "Disciplina · Acero · Cultura", "/ Est. 2014", "Transforma Tu Realidad", "/ 3 Sedes"]} speed="20s" />
         <Programs />
         <Trainers />
         <Infrastructure />
-        <Marquee items={["Únete al Clan", "/ Planes 2026", "Sin permanencia", "/ 3 sedes · 1 comunidad", "Prueba gratis", "/ 1er día gratis"]} accent speed="55s" />
+        <Marquee items={["Únete al Clan", "/ Planes 2026", "Sin permanencia", "/ 3 sedes · 1 comunidad", "Prueba gratis", "/ 1er día gratis"]} accent speed="25s" />
         <Pricing />
         <FAQ />
         <Location />

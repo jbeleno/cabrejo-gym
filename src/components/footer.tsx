@@ -16,11 +16,9 @@ function FooterCol({ title, items }: { title: string; items: [string, string][] 
 export function Footer() {
   return (
     <footer className="relative bg-ink border-t border-white/10">
-      <div aria-hidden="true" className="relative overflow-hidden">
-        <div className="max-w-[1600px] mx-auto px-5 md:px-10 pt-20">
-          <div className="font-display font-black italic uppercase leading-[0.85] tracking-[-0.04em] text-[clamp(5rem,22vw,22rem)] select-none">
-            <span className="text-white">CABREJO</span><span className="text-volt">GYM</span>
-          </div>
+      <div aria-hidden="true" className="relative overflow-hidden max-w-[1600px] mx-auto px-5 md:px-10 pt-16 md:pt-20">
+        <div className="font-display font-black italic uppercase leading-[0.85] tracking-[-0.04em] text-[clamp(2.5rem,10vw,8rem)] select-none whitespace-nowrap">
+          <span className="text-white">CABREJO</span><span className="text-volt">GYM</span>
         </div>
       </div>
 

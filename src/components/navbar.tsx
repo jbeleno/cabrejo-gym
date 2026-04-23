@@ -29,23 +29,23 @@ export function Navbar() {
           <span className="text-white">CABREJO</span><span className="text-volt italic">GYM</span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-9" aria-label="Principal">
+        <nav className="hidden xl:flex items-center gap-6 2xl:gap-9" aria-label="Principal">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="group relative text-[13px] uppercase tracking-[0.18em] font-bold text-white/80 hover:text-white transition-colors">
+            <a key={l.href} href={l.href} className="group relative text-[12px] xl:text-[13px] uppercase tracking-[0.14em] xl:tracking-[0.18em] font-bold text-white/80 hover:text-white transition-colors">
               {l.label}
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-volt transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <span className="font-mono text-[11px] tracking-[0.25em] text-white/40 uppercase">Neiva · 3 sedes</span>
           <PillBtn href="#planes" variant="volt" className="!px-5 !py-3">Únete ahora <Arrow /></PillBtn>
         </div>
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="lg:hidden relative w-11 h-11 flex flex-col items-center justify-center gap-1.5 border border-white/15"
+          className="xl:hidden relative w-11 h-11 flex flex-col items-center justify-center gap-1.5 border border-white/15"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
         >
@@ -55,7 +55,7 @@ export function Navbar() {
         </button>
       </div>
 
-      <div className={`lg:hidden overflow-hidden transition-[max-height] duration-500 ease-out ${open ? "max-h-[500px]" : "max-h-0"}`}>
+      <div className={`xl:hidden overflow-hidden transition-[max-height] duration-500 ease-out ${open ? "max-h-[500px]" : "max-h-0"}`}>
         <div className="bg-ink/95 backdrop-blur border-t border-white/10 px-6 py-8">
           <div className="flex flex-col gap-5">
             {links.map((l) => (

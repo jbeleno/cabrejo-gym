@@ -10,8 +10,9 @@ export function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute -right-8 top-28 font-display font-black italic leading-none text-[28vw] text-white/[0.035] select-none">01</div>
       <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-ink via-ink/80 to-transparent" aria-hidden="true" />
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-5 md:px-10 pt-6 flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.22em] text-white/45">
-        <span>Est. 2014 · Neiva, Huila</span>
+      <div className="relative z-10 max-w-[1600px] mx-auto px-5 md:px-10 pt-6 flex items-center justify-between text-[10px] md:text-[11px] font-mono uppercase tracking-[0.15em] md:tracking-[0.22em] text-white/45">
+        <span className="hidden sm:inline">Est. 2014 · Neiva, Huila</span>
+        <span className="sm:hidden">Neiva, Huila</span>
         <span className="hidden md:inline">Abierto 05:00 — 23:00</span>
         <span className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-volt animate-pulse" />Cupo abierto</span>
       </div>

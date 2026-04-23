@@ -16,7 +16,7 @@ export function Trainers() {
           <div>
             <SectionTag idx={3} label="Staff Elite" />
             <h2 className="mt-6 font-display font-black uppercase leading-[0.86] tracking-[-0.03em] text-[clamp(2.5rem,7vw,6rem)]">
-              Conoce a<br />los <span className="stroke-text italic text-volt">expertos</span>
+              Nuestros<br /><span className="italic text-volt">Coaches</span>
             </h2>
           </div>
           <p className="max-w-sm text-white/60 text-lg">
