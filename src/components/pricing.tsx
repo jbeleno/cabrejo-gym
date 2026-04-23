@@ -58,7 +58,7 @@ export function Pricing() {
 
         <div className="mt-10 grid md:grid-cols-2 xl:grid-cols-4 gap-5">
           {plans.map((p, i) => (
-            <article key={p.id + mode} className={`relative flex flex-col p-7 border transition-all duration-300 reveal ${"popular" in p && p.popular ? "bg-ink border-volt shadow-[0_30px_60px_-25px_rgba(255,245,13,0.35)] lg:-translate-y-3" : "bg-ink border-white/10 hover:border-white/30"}`} style={{ transitionDelay: `${i * 70}ms` }}>
+            <article key={p.id + mode} className={`relative flex flex-col p-7 border transition-all duration-300 ${"popular" in p && p.popular ? "bg-ink border-volt shadow-[0_30px_60px_-25px_rgba(255,245,13,0.35)] lg:-translate-y-3" : "bg-ink border-white/10 hover:border-white/30"}`}>
               {"popular" in p && p.popular && (
                 <div className="absolute -top-3 left-6 bg-volt text-ink font-bold uppercase text-[10px] tracking-[0.28em] px-3 py-1.5">Más popular</div>
               )}
