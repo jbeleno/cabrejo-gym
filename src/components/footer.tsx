@@ -32,11 +32,11 @@ export function Footer() {
             </p>
             <div className="mt-8 flex items-center gap-3">
               {[
-                { n: "Instagram", icon: <><rect x="3" y="3" width="18" height="18" rx="4" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></> },
-                { n: "Facebook", icon: <path d="M13 22v-8h3l1-4h-4V7.5c0-1.2.3-2 2-2h2V2.1c-.9-.1-2-.2-3.1-.2-3.1 0-5 1.9-5 5.2V10H6v4h3v8h4Z" /> },
-                { n: "TikTok", icon: <path d="M16 3c0 2.2 1.8 4 4 4v3c-1.6 0-3.1-.5-4.3-1.4V15a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v3a3 3 0 1 0 2 2.8V3h3.3Z" /> },
+                { n: "Instagram", href: "https://www.instagram.com/cabrejogym", icon: <><rect x="3" y="3" width="18" height="18" rx="4" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></> },
+                { n: "Facebook", href: "https://www.facebook.com/cabrejogym", icon: <path d="M13 22v-8h3l1-4h-4V7.5c0-1.2.3-2 2-2h2V2.1c-.9-.1-2-.2-3.1-.2-3.1 0-5 1.9-5 5.2V10H6v4h3v8h4Z" /> },
+                { n: "TikTok", href: "https://www.tiktok.com/@cabrejogym", icon: <path d="M16 3c0 2.2 1.8 4 4 4v3c-1.6 0-3.1-.5-4.3-1.4V15a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v3a3 3 0 1 0 2 2.8V3h3.3Z" /> },
               ].map((s) => (
-                <a key={s.n} href="#" aria-label={s.n} className="w-10 h-10 border border-white/15 flex items-center justify-center text-white/75 hover:bg-volt hover:text-ink hover:border-volt transition">
+                <a key={s.n} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.n} className="w-10 h-10 border border-white/15 flex items-center justify-center text-white/75 hover:bg-volt hover:text-ink hover:border-volt transition">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">{s.icon}</svg>
                 </a>
               ))}
@@ -59,8 +59,8 @@ export function Footer() {
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between font-mono text-[11px] tracking-[0.22em] uppercase text-white/40">
           <div>© 2026 Cabrejo Gym · Neiva, Huila — Todos los derechos reservados</div>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-volt">Privacidad</a>
-            <a href="#" className="hover:text-volt">Términos</a>
+            <a href="/privacidad" className="hover:text-volt">Privacidad</a>
+            <a href="/terminos" className="hover:text-volt">Términos</a>
             <span className="hidden md:flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-volt" />Cupo abierto</span>
           </div>
         </div>
